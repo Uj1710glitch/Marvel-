@@ -1,6 +1,8 @@
 # 🦸 Marvel Omniverse Nexus: Interactive Archives & Q&A
 
-An interactive, responsive web application designed for exploring Marvel movies, iconic comic storylines, reading orders, and character dossiers—equipped with an intelligent AI Query Console ("J.A.R.V.I.S. / Cerebro").
+> In this you can get all information about Marvel movies, storylines, comics, and everything you want to know!
+
+An interactive, responsive web application designed for exploring Marvel movies, iconic comic storylines, reading orders, and character dossiers—equipped with an intelligent AI Query Console ("J.A.R.V.I.S. / Cerebro") with voice interaction and browser speech output.
 
 Live static web architecture: **100% client-side, zero build steps, completely free to host on GitHub Pages!**
 
@@ -9,6 +11,8 @@ Live static web architecture: **100% client-side, zero build steps, completely f
 ## ⚡ Features
 
 1. **J.A.R.V.I.S. / Cerebro AI Query Console**:
+   - 🎙️ **Voice Recognition Input**: Click the microphone icon to ask questions with your voice.
+   - 🔊 **Browser Voice Output**: J.A.R.V.I.S. reads answers and dossiers out loud.
    - Ask any natural language question about Marvel movies, storylines, comics, or characters.
    - Dual-engine: Instant offline S.H.I.E.L.D. archive + optional live Google Gemini AI mode for answering *any* question across the entire Marvel multiverse.
 2. **Cinematic MCU Catalog**:
@@ -27,45 +31,17 @@ Live static web architecture: **100% client-side, zero build steps, completely f
 
 ---
 
-## 🚀 How to Upload to GitHub & Host with GitHub Pages
+## 🚀 How to Enable GitHub Pages (Free Instant Website)
 
-### Step 1: Open Terminal in this Folder
-Open PowerShell or your preferred terminal inside this project folder:
-```bash
-cd "C:\Users\Ujjwal tyagi\.gemini\antigravity\scratch\marvel-nexus"
-```
-
-### Step 2: Initialize Git & Commit
-```bash
-git init
-git add .
-git commit -m "Initial commit: Marvel Omniverse Nexus"
-```
-
-### Step 3: Create a GitHub Repository
-1. Log in to [GitHub](https://github.com).
-2. Click **New** (or "+" in the top right corner) to create a new repository.
-3. Name it `marvel-nexus` (or `<your-username>.github.io` if you want it as your primary site).
-4. Keep it **Public** so anyone can visit it.
-5. Click **Create repository** (do not initialize with README since you already have this one).
-
-### Step 4: Push Your Code to GitHub
-Copy the commands shown on your GitHub repository page and run them:
-```bash
-git branch -M main
-git remote add origin https://github.com/<YOUR-USERNAME>/marvel-nexus.git
-git push -u origin main
-```
-
-### Step 5: Enable GitHub Pages (Free Instant Website)
-1. On your GitHub repository page, click **Settings** (gear icon near top right).
-2. On the left sidebar, click **Pages**.
-3. Under **Build and deployment** > **Branch**:
+1. Go to your GitHub repository: [https://github.com/Uj1710glitch/Marvel-](https://github.com/Uj1710glitch/Marvel-)
+2. Click **Settings** (gear icon near top right).
+3. On the left sidebar, click **Pages**.
+4. Under **Build and deployment** > **Branch**:
    - Select `main`
    - Folder: `/ (root)`
    - Click **Save**.
-4. Within 1-2 minutes, your website will be live worldwide at:
-   `https://<YOUR-USERNAME>.github.io/marvel-nexus/`
+5. Within 1-2 minutes, your website will be live worldwide at:  
+   **`https://Uj1710glitch.github.io/Marvel-/`**
 
 ---
 
