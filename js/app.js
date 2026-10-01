@@ -91,6 +91,8 @@ class MarvelNexusApp {
         this.saveApiKeyBtn = document.getElementById('save-api-key-btn');
         this.apiStatusText = document.getElementById('api-status-text');
         this.soundToggleBtn = document.getElementById('sound-toggle-btn');
+        this.voiceInputBtn = document.getElementById('voice-input-btn');
+        this.isRecording = false;
     }
 
     bindEvents() {
@@ -183,6 +185,11 @@ class MarvelNexusApp {
             });
         }
 
+        // Voice Recognition Button (Microphone)
+        if (this.voiceInputBtn) {
+            this.voiceInputBtn.addEventListener('click', () => this.toggleVoiceRecognition());
+        }
+
         // Global hotkey: '/' to focus search
         window.addEventListener('keydown', (e) => {
             if (e.key === '/' && document.activeElement !== this.queryInput && document.activeElement !== this.apiKeyInput) {
@@ -194,8 +201,116 @@ class MarvelNexusApp {
             if (e.key === 'Escape') {
                 this.closeModal();
                 this.closeSettingsModal();
+                if ('speechSynthesis' in window) window.speechSynthesis.cancel();
             }
         });
+    }
+
+    toggleVoiceRecognition() {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+            alert("Speech recognition is not supported in this browser. Please try Google Chrome or Microsoft Edge.");
+            return;
+        }
+
+        if (this.isRecording) {
+            if (this.recognition) this.recognition.stop();
+            return;
+        }
+
+        try {
+            this.recognition = new SpeechRecognition();
+            this.recognition.lang = 'en-US';
+            this.recognition.interimResults = false;
+            this.recognition.maxAlternatives = 1;
+
+            this.recognition.onstart = () => {
+                this.isRecording = true;
+                this.voiceInputBtn.classList.add('recording');
+                this.queryInput.placeholder = "🎙️ Listening... Speak your Marvel question now!";
+                this.playHudSound('scan');
+            };
+
+            this.recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                this.queryInput.value = transcript;
+                this.playHudSound('beep');
+                this.handleQuerySubmit();
+            };
+
+            this.recognition.onerror = (event) => {
+                console.warn("Speech recognition error:", event.error);
+                this.isRecording = false;
+                this.voiceInputBtn.classList.remove('recording');
+                this.queryInput.placeholder = "Ask about any movie, storyline, or comic...";
+            };
+
+            this.recognition.onend = () => {
+                this.isRecording = false;
+                this.voiceInputBtn.classList.remove('recording');
+                this.queryInput.placeholder = "Ask about any movie, storyline, or comic (e.g. 'Secret Wars 2015')...";
+            };
+
+            this.recognition.start();
+        } catch (e) {
+            console.error("Speech recognition could not start:", e);
+        }
+    }
+
+    speakCurrentResult(btn) {
+        if (!('speechSynthesis' in window)) {
+            alert("Text-to-speech is not supported in this browser.");
+            return;
+        }
+
+        if (window.speechSynthesis.speaking) {
+            window.speechSynthesis.cancel();
+            if (btn) {
+                btn.classList.remove('speaking');
+                btn.innerHTML = '🔊 Listen to J.A.R.V.I.S.';
+            }
+            return;
+        }
+
+        if (!this.lastResultContent) return;
+
+        // Strip HTML markup for speech
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = this.lastResultContent;
+        // Remove code blocks and tags from speech
+        const tags = tempDiv.querySelectorAll('.tag-chip, .badge, code');
+        tags.forEach(t => t.remove());
+
+        const textToSpeak = tempDiv.innerText.replace(/\s+/g, ' ').trim();
+        const utterance = new SpeechSynthesisUtterance(textToSpeak);
+        utterance.rate = 1.0;
+        utterance.pitch = 0.95;
+
+        // Choose a fitting voice (prefer British / English if found)
+        const voices = window.speechSynthesis.getVoices();
+        const jarvisVoice = voices.find(v => v.lang.startsWith('en') && (v.name.includes('UK') || v.name.includes('British') || v.name.includes('George') || v.name.includes('Natural') || v.name.includes('David'))) || voices.find(v => v.lang.startsWith('en'));
+        if (jarvisVoice) utterance.voice = jarvisVoice;
+
+        if (btn) {
+            btn.classList.add('speaking');
+            btn.innerHTML = '⏹️ Stop Speaking';
+        }
+
+        utterance.onend = () => {
+            if (btn) {
+                btn.classList.remove('speaking');
+                btn.innerHTML = '🔊 Listen to J.A.R.V.I.S.';
+            }
+        };
+
+        utterance.onerror = () => {
+            if (btn) {
+                btn.classList.remove('speaking');
+                btn.innerHTML = '🔊 Listen to J.A.R.V.I.S.';
+            }
+        };
+
+        window.speechSynthesis.speak(utterance);
     }
 
     switchTab(tabId) {
@@ -207,6 +322,11 @@ class MarvelNexusApp {
     async handleQuerySubmit() {
         const query = this.queryInput.value.trim();
         if (!query) return;
+
+        // Stop any ongoing speech
+        if ('speechSynthesis' in window && window.speechSynthesis.speaking) {
+            window.speechSynthesis.cancel();
+        }
 
         this.playHudSound('scan');
         this.queryResultsContainer.innerHTML = `
@@ -235,9 +355,24 @@ class MarvelNexusApp {
 
     renderOracleResult(result) {
         let warningHtml = result.warning ? `<div class="warning-banner">${result.warning}</div>` : '';
-        this.queryResultsContainer.innerHTML = warningHtml + result.html;
+        let html = result.html;
 
-        // Smoothly scroll results into view if needed
+        // Insert J.A.R.V.I.S. Voice button into the oracle-header
+        const speakBtnHtml = `
+            <div style="margin-top: 10px;">
+                <button class="speak-dossier-btn" onclick="window.app.speakCurrentResult(this)">
+                    🔊 Listen to J.A.R.V.I.S.
+                </button>
+            </div>
+        `;
+        if (html.includes('</h2>')) {
+            html = html.replace('</h2>', `</h2>${speakBtnHtml}`);
+        }
+
+        this.lastResultContent = html;
+        this.queryResultsContainer.innerHTML = warningHtml + html;
+
+        // Smoothly scroll results into view
         this.queryResultsContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 

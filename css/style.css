@@ -311,6 +311,68 @@ body {
     box-shadow: 0 6px 20px var(--marvel-red-glow);
 }
 
+.voice-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.voice-btn:hover {
+    background: rgba(0, 229, 255, 0.15);
+    border-color: var(--arc-cyan);
+    transform: scale(1.05);
+}
+
+.voice-btn.recording {
+    background: var(--marvel-red);
+    border-color: #fff;
+    box-shadow: 0 0 20px var(--marvel-red-glow);
+    animation: micPulse 1.2s infinite;
+}
+
+@keyframes micPulse {
+    0% { transform: scale(1); box-shadow: 0 0 10px var(--marvel-red-glow); }
+    50% { transform: scale(1.1); box-shadow: 0 0 25px rgba(230, 36, 41, 0.8); }
+    100% { transform: scale(1); box-shadow: 0 0 10px var(--marvel-red-glow); }
+}
+
+.speak-dossier-btn {
+    background: rgba(0, 229, 255, 0.08);
+    border: 1px solid rgba(0, 229, 255, 0.3);
+    color: var(--arc-cyan);
+    padding: 6px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: var(--transition-fast);
+    margin-top: 0.5rem;
+}
+
+.speak-dossier-btn:hover {
+    background: var(--arc-cyan);
+    color: #000;
+    box-shadow: 0 0 12px var(--arc-cyan-glow);
+}
+
+.speak-dossier-btn.speaking {
+    background: var(--stark-gold);
+    color: #000;
+    border-color: var(--stark-gold);
+}
+
 .prompt-suggestions {
     margin-top: 1.25rem;
     display: flex;
