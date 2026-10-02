@@ -7,12 +7,12 @@ echo.
 echo Make sure you have created a public repository on https://github.com/new
 echo Example URL: https://github.com/your-username/marvel-nexus.git
 echo.
-set /p REPO_URL="Enter your GitHub Repository URL: "
+set "DEFAULT_URL=https://github.com/Uj1710glitch/Marvel-.git"
+echo Default repository: %DEFAULT_URL%
+set /p REPO_URL="Enter your GitHub Repository URL (or press ENTER to use default): "
 
 if "%REPO_URL%"=="" (
-    echo [ERROR] No URL entered. Aborting.
-    pause
-    exit /b 1
+    set "REPO_URL=%DEFAULT_URL%"
 )
 
 echo.
