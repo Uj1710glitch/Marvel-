@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marvel Omniverse Nexus | Movies, Storylines & Comics Archive</title>
+    <meta name="description" content="Explore and ask anything about any Marvel movie, iconic comic storyline, character dossier, or reading order. Powered by the Marvel Omniverse Archive.">
+    
+    <!-- Inline Marvel Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23e62429'/><path d='M6 8 L10 24 L14 12 L18 24 L22 8 L26 24' stroke='%23ffffff' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- SITE HEADER -->
+    <header class="site-header">
+        <div class="header-container">
+            <div class="brand-wrapper">
+                <span class="marvel-badge">MARVEL</span>
+                <div>
+                    <span class="brand-title">OMNIVERSE NEXUS</span>
+                    <span class="brand-subtitle">S.H.I.E.L.D. ARCHIVE // CEREBRO LINK</span>
+                </div>
+            </div>
+
+            <!-- TAB NAVIGATION -->
+            <nav class="main-nav" aria-label="Main Navigation">
+                <button class="nav-tab-btn active" data-tab="oracle">
+                    <span>🔮</span> Ask J.A.R.V.I.S.
+                </button>
+                <button class="nav-tab-btn" data-tab="movies">
+                    <span>🎬</span> Movies & Series
+                </button>
+                <button class="nav-tab-btn" data-tab="storylines">
+                    <span>📖</span> Iconic Storylines
+                </button>
+                <button class="nav-tab-btn" data-tab="characters">
+                    <span>🦸</span> Character Codex
+                </button>
+                <button class="nav-tab-btn" data-tab="comic-runs">
+                    <span>📚</span> Master Comic Runs
+                </button>
+            </nav>
+
+            <!-- CONTROLS & SETTINGS -->
+            <div class="header-actions">
+                <button class="action-btn active" id="sound-toggle-btn" title="Toggle Stark HUD Sound Effects">
+                    🔊 Audio: ON
+                </button>
+                <button class="action-btn" id="settings-btn" title="Configure AI & API Settings">
+                    ⚙️ AI Mode
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-wrapper">
+
+        <!-- HERO SECTION -->
+        <section class="hero-banner">
+            <span class="hero-tag">MULTIVERSE DATABASE • EARTH-616 & MCU-199999</span>
+            <h1 class="hero-headline">THE MARVEL OMNIVERSE ARCHIVE</h1>
+            <p class="hero-desc">
+                Ask anything about any Marvel movie, legendary comic storyline, event reading order, or character dossier. Powered by an encyclopedic neural knowledge matrix.
+            </p>
+        </section>
+
+        <!-- TAB 1: ORACLE / ASK JARVIS -->
+        <div class="tab-view active" id="tab-oracle">
+            <section class="oracle-console-card">
+                <div class="query-input-wrapper">
+                    <input 
+                        type="text" 
+                        id="oracle-query-input" 
+                        class="query-input" 
+                        placeholder="Ask about any movie, storyline, or comic (e.g. 'Secret Wars 2015', 'MCU chronological order', 'Gorr the God Butcher in comics')..."
+                        autocomplete="off"
+                        spellcheck="false"
+                    >
+                    <button id="voice-input-btn" class="voice-btn" title="Speak your question to J.A.R.V.I.S. (Microphone)" type="button">
+                        🎙️
+                    </button>
+                    <button id="oracle-submit-btn" class="submit-query-btn" type="button">
+                        <span>SEARCH ARCHIVES</span> ➜
+                    </button>
+                </div>
+
+                <div class="prompt-suggestions">
+                    <span class="suggestion-label">Suggested Queries:</span>
+                    <button class="prompt-chip" data-prompt="Secret Wars 2015">✨ Secret Wars 2015</button>
+                    <button class="prompt-chip" data-prompt="MCU chronological order">🎬 MCU Chronological Order</button>
+                    <button class="prompt-chip" data-prompt="The Infinity Gauntlet">⚡ Infinity Gauntlet (1991)</button>
+                    <button class="prompt-chip" data-prompt="Civil War">📖 Civil War Comic Event</button>
+                    <button class="prompt-chip" data-prompt="House of M">💥 House of M: No More Mutants</button>
+                    <button class="prompt-chip" data-prompt="Gorr the God Butcher">🦸 Who is Gorr in Comics?</button>
+                    <button class="prompt-chip" data-prompt="Spider-Verse">🕸️ Spider-Verse Event</button>
+                    <button class="prompt-chip" data-prompt="Doctor Doom">🦹 Doctor Doom God Emperor</button>
+                </div>
+            </section>
+
+            <!-- DYNAMIC RESULTS DISPLAY -->
+            <div id="oracle-results-view" class="oracle-results-area">
+                <!-- Initial Welcome State -->
+                <div class="oracle-card">
+                    <div class="oracle-header">
+                        <span class="badge badge-char">S.H.I.E.L.D. Neural Terminal Ready</span>
+                        <h2>Welcome to the Omniverse Archives, Agent.</h2>
+                        <p class="oracle-credits">System Operational • All Multiverse Frequency Nodes Synchronized</p>
+                    </div>
+                    <div class="oracle-section">
+                        <p>
+                            Type any question above or click one of the suggested query chips to inspect deep lore dossiers, comprehensive issue checklists, movie-to-comic comparisons, box office stats, and reading guides.
+                        </p>
+                    </div>
+                    <div class="oracle-grid-two">
+                        <div class="oracle-sub-box">
+                            <h4>🎬 Cinematic Catalog</h4>
+                            <p>Complete MCU records across Phase 1 through Phase 5 & 6, including in-universe chronological timeline dates and post-credit breakdowns.</p>
+                        </div>
+                        <div class="oracle-sub-box">
+                            <h4>📖 Comic Event Guides</h4>
+                            <p>Issue-by-issue reading orders, cosmic consequences, and creator credits for landmark crossovers from 1980 to the present.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: MOVIES & SERIES -->
+        <div class="tab-view" id="tab-movies">
+            <div class="section-controls-bar">
+                <h2>Marvel Cinematic Universe Records</h2>
+                <div class="controls-group">
+                    <label for="movie-sort-select">Order:</label>
+                    <select id="movie-sort-select" class="hud-select">
+                        <option value="release">Release Date Order</option>
+                        <option value="chronological">In-Universe Chronological Order</option>
+                    </select>
+
+                    <label for="movie-phase-select">Phase:</label>
+                    <select id="movie-phase-select" class="hud-select">
+                        <option value="all">All Phases</option>
+                        <option value="Phase 1">Phase 1</option>
+                        <option value="Phase 2">Phase 2</option>
+                        <option value="Phase 3">Phase 3</option>
+                        <option value="Phase 4">Phase 4</option>
+                        <option value="Phase 5">Phase 5</option>
+                    </select>
+                </div>
+            </div>
+            <div class="card-grid" id="movies-grid"></div>
+        </div>
+
+        <!-- TAB 3: STORYLINES -->
+        <div class="tab-view" id="tab-storylines">
+            <div class="section-controls-bar">
+                <h2>Iconic Comic Storylines & Crossovers</h2>
+                <span class="badge badge-dim">Earth-616 & Multiversal Epics</span>
+            </div>
+            <div class="card-grid" id="storylines-grid"></div>
+        </div>
+
+        <!-- TAB 4: CHARACTERS -->
+        <div class="tab-view" id="tab-characters">
+            <div class="section-controls-bar">
+                <h2>Superhuman Codex & Power Grids</h2>
+                <span class="badge badge-dim">Official 1-7 Scale Ratings</span>
+            </div>
+            <div class="card-grid" id="characters-grid"></div>
+        </div>
+
+        <!-- TAB 5: COMIC RUNS -->
+        <div class="tab-view" id="tab-comic-runs">
+            <div class="section-controls-bar">
+                <h2>Master Comic Runs & Creative Masterpieces</h2>
+                <span class="badge badge-dim">Essential Reading Curations</span>
+            </div>
+            <div class="card-grid" id="comic-runs-grid"></div>
+        </div>
+
+    </main>
+
+    <!-- DETAIL MODAL -->
+    <div class="modal-overlay" id="detail-modal" role="dialog" aria-modal="true">
+        <div class="modal-container">
+            <button class="modal-close-btn" id="modal-close-btn" aria-label="Close dialog">&times;</button>
+            <div class="modal-content-body" id="modal-inner-content">
+                <!-- Injected via JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- SETTINGS / GEMINI API MODAL -->
+    <div class="modal-overlay" id="settings-modal" role="dialog" aria-modal="true">
+        <div class="modal-container">
+            <button class="modal-close-btn" id="settings-close-btn" aria-label="Close settings">&times;</button>
+            <div class="settings-box">
+                <h2>⚙️ Cerebro AI Settings</h2>
+                <p>
+                    The Marvel Omniverse Nexus comes with an extensive built-in offline knowledge archive. You can also connect a free <strong>Google Gemini API Key</strong> to unlock unlimited live AI Q&A for answering questions about <em>any</em> obscure comic issue, variant, or multiverse reality!
+                </p>
+                <div class="api-input-group">
+                    <input 
+                        type="password" 
+                        id="gemini-api-key-input" 
+                        class="api-input" 
+                        placeholder="Paste your Google Gemini API Key (optional)..."
+                    >
+                    <button id="save-api-key-btn" class="save-key-btn">Save Key</button>
+                </div>
+                <div id="api-status-text" style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 10px;"></div>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 15px;">
+                    🔒 Keys are stored purely locally in your browser's <code>localStorage</code> and never sent to any intermediary server.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p><strong>MARVEL OMNIVERSE NEXUS</strong> • Designed for True Believers worldwide.</p>
+            <p style="font-size: 0.78rem;">Marvel Comics, characters, and related indicia are registered trademarks of Marvel Characters, Inc. / The Walt Disney Company.</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="js/marvel-data.js"></script>
+    <script src="js/ai-oracle.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
